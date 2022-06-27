@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class Markers : MonoBehaviour, IResetable
 {
@@ -19,7 +21,7 @@ public class Markers : MonoBehaviour, IResetable
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (timer > period)
+        if (timer >= period)
         {
             CreateMarker();
             timer = 0f;
@@ -45,6 +47,21 @@ public class Markers : MonoBehaviour, IResetable
     public void Reset()
     {
         CreateMarker();
-        timer = 0f;
+        timer = 0;
+    }
+
+    public void ClearMarkers()
+    {
+        List<GameObject> children = new List<GameObject>();
+
+        for (int i=0;i<this.transform.childCount;i++)
+        {
+            children.Add(this.transform.GetChild(i).gameObject);
+        }
+
+        foreach(GameObject child in children)
+        {
+            Destroy(child);
+        }
     }
 }

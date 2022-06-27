@@ -76,6 +76,50 @@ public class Movement : MonoBehaviour, IResetable
     public void Reset()
     {
         rb.MovePosition(startPosition);
+        rb.transform.position = startPosition; //necessary because rb.MovePosition only moves on next frame.
         rb.velocity = startVelocity;
+    }
+
+    public void ChangeMovement(int movementTypeId)
+    {
+        print("Changing Movement... " + movementTypeId);
+        switch(movementTypeId)
+        {
+            case 0:
+                {
+                    movementType = MovementType.Linear;
+                    break;
+                }
+            case 1:
+                {
+                    movementType = MovementType.Sin;
+                    break;
+                }
+            default:
+                {
+                    break;
+                }
+        }
+    }
+
+    public void ChangeGain(string value)
+    {
+        float newValue;
+
+        if (float.TryParse(value,out newValue))
+        {
+            gain = newValue;
+            print("Value Changed Successfully");
+        }
+    }
+
+    public void ChangePeriod(string value)
+    {
+        float newValue;
+
+        if (float.TryParse(value, out newValue))
+        {
+            period = newValue;
+        }
     }
 }
