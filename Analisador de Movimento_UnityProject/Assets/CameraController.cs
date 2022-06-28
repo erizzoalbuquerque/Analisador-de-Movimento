@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] float _gain = 1f;
+    [SerializeField] float gain = 1f;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +17,6 @@ public class CameraController : MonoBehaviour
     {
         float delta = Input.mouseScrollDelta.y;
 
-        Camera.main.orthographicSize -= delta * _gain;
+        Camera.main.orthographicSize -= delta * gain;
     }
 }

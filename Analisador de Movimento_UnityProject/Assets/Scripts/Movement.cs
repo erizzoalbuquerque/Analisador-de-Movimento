@@ -9,13 +9,13 @@ public class Movement : MonoBehaviour, IResetable
         Sin
     }
 
-    public AnalysisTime timer;
-
-    public Vector2 startVelocity = Vector3.zero;
-    public float gain = 1f;
-    public float period = 1f;
-
-    public MovementType movementType = MovementType.Linear;
+    [SerializeField] AnalysisTime timer;
+                     
+    [SerializeField] Vector2 startVelocity = Vector3.zero;
+    [SerializeField] float gain = 1f;
+    [SerializeField] float period = 1f;
+                     
+    [SerializeField] MovementType movementType = MovementType.Linear;
 
     Rigidbody rb;
     Vector3 startPosition;

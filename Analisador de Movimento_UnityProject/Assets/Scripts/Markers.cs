@@ -4,13 +4,14 @@ using System.Collections.Generic;
 
 public class Markers : MonoBehaviour, IResetable
 {
-    public Transform target;
-    public float period = 1f;
-    public Color color = Color.black;
-    public Sprite sprite = null;
-    public float size = 0.1f;
+    [SerializeField] Transform target;
+    [SerializeField] Transform markersParent;
+    [SerializeField] float period = 1f;
+    [SerializeField] Color color = Color.black;
+    [SerializeField] Sprite sprite = null;
+    [SerializeField] float size = 0.1f;
 
-    private float timer;
+    float timer;
 
     // Start is called before the first frame update
     void Start()
@@ -37,7 +38,7 @@ public class Markers : MonoBehaviour, IResetable
         marker.transform.position = target.position;
         marker.transform.rotation = target.rotation;
         marker.transform.localScale = Vector3.one * size;
-        marker.transform.parent = this.transform;
+        marker.transform.parent = markersParent;
 
         SpriteRenderer spriteRenderer = marker.AddComponent(typeof(SpriteRenderer)) as SpriteRenderer;
         spriteRenderer.color = color;
@@ -54,9 +55,9 @@ public class Markers : MonoBehaviour, IResetable
     {
         List<GameObject> children = new List<GameObject>();
 
-        for (int i=0;i<this.transform.childCount;i++)
+        for (int i=0;i<markersParent.childCount;i++)
         {
-            children.Add(this.transform.GetChild(i).gameObject);
+            children.Add(markersParent.GetChild(i).gameObject);
         }
 
         foreach(GameObject child in children)
